@@ -1,0 +1,157 @@
+[bridge]
+mode = "EchoLinkOpenBridge"
+direction = "bidirectional"
+half_duplex = true
+max_transmit_seconds = 180
+tx_hang_ms = 500
+enabled = true
+
+[echolink]
+callsign = "W1ABC-L"
+password = "CHANGE_ME"
+allow_inbound_connections = true
+max_connected_stations = 50
+allow_conferences = false
+allow_repeaters = true
+allow_links = true
+send_station_list_to_connected_stations = true
+station_list_update_seconds = 30
+announce_connect_disconnect = true
+announce_current_speaker = true
+bind_host = "0.0.0.0"
+audio_port = 5198
+control_port = 5199
+directory_host = "servers.echolink.org"
+directory_port = 5200
+location = "Private EchoLink OpenBridge Gateway"
+status_text = "EchoLink OpenBridge Gateway"
+register_with_directory = true
+directory_refresh_seconds = 480
+client_timeout_seconds = 120
+
+[conference]
+enabled = true
+max_stations = 50
+always_repeat_echolink_audio = true
+one_echolink_speaker_at_a_time = true
+send_roster_to_clients = true
+roster_update_seconds = 30
+show_current_speaker = true
+
+[openbridge]
+host = "hblink.example.net"
+port = 62035
+passphrase = "CHANGE_ME"
+network_id = 310999901
+fixed_tgid = 3100
+slot = 1
+call_type = "group"
+reconnect_seconds = 10
+local_bind_host = "0.0.0.0"
+local_bind_port = 54015
+both_slots = false
+
+[identity]
+use_dynamic_source_id = true
+fallback_source_id = 3109999
+strip_echolink_suffixes = true
+strip_suffixes = ["-L", "-R", "-M"]
+lookup_source = "local_radioid"
+radioid_file = "/opt/echolink-ob/data/users.json"
+radioid_url = "https://radioid.net/static/users.json"
+radioid_fallback_url = "https://radioid.net/static/user.csv"
+auto_download_radioid = true
+manual_overrides_file = "/opt/echolink-ob/data/overrides.toml"
+positive_cache_days = 30
+negative_cache_hours = 24
+allow_conferences_dynamic_id = false
+cache_file = "/opt/echolink-ob/data/cache.sqlite"
+
+[vocoder]
+preferred = "md380emu"
+fallback = "ambeserver"
+allow_fallback = true
+switch_back_when_idle = true
+allow_mid_stream_switch = false
+
+[ambeserver]
+host = "127.0.0.1"
+port = 2460
+timeout_ms = 500
+
+[md380emu]
+host = "127.0.0.1"
+port = 2990
+timeout_ms = 500
+enabled = true
+auto_start = true
+reuse_existing = true
+qemu_path = "/opt/md380-emu/qemu-arm-static"
+binary_path = "/opt/md380-emu/md380-emu"
+startup_wait_seconds = 2.0
+
+[audio]
+sample_rate = 8000
+channels = 1
+format = "s16le"
+frame_ms = 20
+jitter_buffer_ms = 120
+silence_gap_ms = 700
+
+[access]
+allow_echolink_callsigns = ["*"]
+deny_echolink_callsigns = []
+banlist_file = "/opt/echolink-ob/data/banlist.txt"
+allowlist_file = "/opt/echolink-ob/data/allowlist.txt"
+allow_duplicate_callsigns = false
+kick_idle_stations = false
+max_idle_minutes = 0
+allow_echolink_users = true
+allow_echolink_links = true
+allow_echolink_repeaters = true
+allow_echolink_conferences = false
+
+[dashboard]
+enabled = true
+listen_host = "127.0.0.1"
+listen_port = 8080
+require_auth = false
+last_heard_file = "/opt/echolink-ob/data/lastheard.json"
+last_heard_limit = 20
+control_file = "/opt/echolink-ob/data/dashboard-commands.jsonl"
+push_interval_seconds = 1.5
+
+[logging]
+level = "INFO"
+log_file = "/opt/echolink-ob/logs/echolink-ob.log"
+
+[port_manager]
+enabled = true
+host = "127.0.0.1"
+range_start = 33000
+range_end = 33199
+reserved_ports = [2222, 2460, 2990, 54015]
+state_file = "/opt/echolink-ob/data/port-plan.json"
+reuse_existing_allocation = true
+
+[analog_bridge]
+enabled = true
+auto_manage_ports = true
+ini_path = "/opt/echolink-ob/generated/Analog_Bridge.ini"
+log_level = 0
+export_metadata = true
+transfer_root_dir = "/tmp"
+subscriber_file = "/var/lib/dvswitch/subscriber_ids.csv"
+decoder_fallback = true
+use_emulator = true
+emulator_address = "127.0.0.1:2990"
+pcm_port = 2222
+min_tx_time_ms = 2500
+repeater_id = 123456
+tx_ts = 2
+color_code = 1
+usrp_audio = "AUDIO_USE_AGC"
+usrp_gain = 1.10
+usrp_agc = "-20,10,100"
+tlv_audio = "AUDIO_BPF"
+tlv_gain = 1.0

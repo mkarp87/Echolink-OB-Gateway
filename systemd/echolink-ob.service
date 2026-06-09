@@ -1,0 +1,18 @@
+[Unit]
+Description=EchoLink OpenBridge Gateway
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/echolink-ob
+ExecStart=/opt/echolink-ob/venv/bin/echolink-ob-full --config /opt/echolink-ob/config/config.toml --status-seconds 15
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=10
+KillSignal=SIGTERM
+User=root
+Group=root
+
+[Install]
+WantedBy=multi-user.target

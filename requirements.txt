@@ -1,0 +1,5 @@
+# Runtime intentionally uses the Python standard library only.
+# Development/test tools:
+pytest>=8.0
+coverage>=7.0
+ruff>=0.5

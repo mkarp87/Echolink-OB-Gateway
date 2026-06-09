@@ -1,0 +1,54 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "echolink-ob"
+version = "1.0.0b9"
+description = "Standalone EchoLink conference to private HBlink3 OpenBridge gateway"
+readme = "README.md"
+requires-python = ">=3.12"
+license = {text = "GPL-3.0-or-later"}
+authors = [{name = "EchoLink OB Gateway contributors"}]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "coverage>=7.0", "ruff>=0.5"]
+
+[project.scripts]
+echolink-ob = "echolink_ob.main:main"
+echolink-ob-openbridge = "echolink_ob.openbridge.test_sender:main"
+echolink-ob-audio-selftest = "echolink_ob.tools.audio_selftest:main"
+echolink-ob-record-dmr = "echolink_ob.openbridge.recorder:main"
+echolink-ob-analyze-dmr = "echolink_ob.openbridge.analyzer:main"
+echolink-ob-extract-ambe = "echolink_ob.dmr.ambe:main"
+echolink-ob-analog-plan = "echolink_ob.analog.ports:main"
+echolink-ob-replay-dmr = "echolink_ob.openbridge.replay:main"
+echolink-ob-run = "echolink_ob.run:main"
+echolink-ob-analog-tone = "echolink_ob.analog.tone:main"
+echolink-ob-analog-tone-openbridge = "echolink_ob.analog.tone_openbridge:main"
+echolink-ob-bridge = "echolink_ob.bridge.runtime:main"
+echolink-ob-usrp-capture = "echolink_ob.analog.usrp_capture:main"
+echolink-ob-echolink-selftest = "echolink_ob.echolink.selftest:main"
+echolink-ob-echolink-preflight = "echolink_ob.echolink.network:main"
+echolink-ob-echolink-runtime = "echolink_ob.echolink.runtime:main"
+echolink-ob-echolink-integration-selftest = "echolink_ob.echolink.integration_selftest:main"
+echolink-ob-directory = "echolink_ob.echolink.directory:main"
+echolink-ob-full = "echolink_ob.full_runtime:main"
+echolink-ob-radioid-update = "echolink_ob.identity.radioid_update:main"
+echolink-ob-dashboard = "echolink_ob.dashboard.server:main"
+
+[tool.setuptools]
+package-dir = {"" = "app"}
+
+[tool.setuptools.packages.find]
+where = ["app"]
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
